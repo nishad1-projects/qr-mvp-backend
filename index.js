@@ -178,7 +178,17 @@ app.get("/api/listings", async (req, res) => {
   const submissions = await Submission.find().sort({ submittedAt: -1 });
   res.json(submissions);
 });
-
+// Simple admin page (MVP)
+app.get("/admin", (req, res) => {
+  res.send(`
+    <h2>QR Generator (Admin)</h2>
+    <form method="POST" action="/generate-qr">
+      <button type="submit" style="padding:10px 20px;font-size:16px;">
+        Generate QR
+      </button>
+    </form>
+  `);
+});
 // Admin login page
 app.get("/admin/login", (req, res) => {
   res.render("admin/login");
