@@ -205,12 +205,19 @@ app.post("/admin/login", (req, res) => {
   }
 });
 
-// Admin dashboard page
+const QRCode = require("./models/QRCode");
+const Submission = require("./models/Submission");
+
+// Admin dashboard page (with data)
 app.get("/admin/dashboard", async (req, res) => {
   if (!req.session.isAdmin) {
     return res.redirect("/admin/login");
   }
-  res.render("admin/dashboard");
+
+  const qrs = await QRCode.find().sort({ _id: -1 });
+  const submissions = await Submission.find().sort({ submittedAt: -1 });
+
+  res.render("admin/dashboard", { qrs, submissions });
 });
 
 //Added Logout admin

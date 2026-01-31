@@ -2,17 +2,58 @@
 <html>
 <head>
   <title>Admin Dashboard</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #f2f2f2; }
+  </style>
 </head>
 <body>
-  <h2>Admin Dashboard</h2>
 
-  <form method="POST" action="/generate-qr">
-    <button type="submit">Generate QR</button>
-  </form>
+<h2>Admin Dashboard</h2>
 
-  <hr />
+<form method="POST" action="/generate-qr">
+  <button type="submit">Generate QR</button>
+</form>
 
-  <a href="/listings" target="_blank">View Public Listings</a>
-  <a href="/admin/logout">Logout</a>
+<p><a href="/admin/logout">Logout</a></p>
+
+<hr>
+
+<h3>Generated QR Codes</h3>
+<table>
+  <tr>
+    <th>QR Code</th>
+    <th>Status</th>
+  </tr>
+  <% qrs.forEach(qr => { %>
+    <tr>
+      <td><%= qr.code %></td>
+      <td><%= qr.isUsed ? "Used" : "Unused" %></td>
+    </tr>
+  <% }) %>
+</table>
+
+<hr>
+
+<h3>Submissions</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>QR Code</th>
+    <th>Date</th>
+  </tr>
+  <% submissions.forEach(s => { %>
+    <tr>
+      <td><%= s.name %></td>
+      <td><%= s.phone %></td>
+      <td><%= s.qrCode %></td>
+      <td><%= new Date(s.submittedAt).toLocaleString() %></td>
+    </tr>
+  <% }) %>
+</table>
+
 </body>
 </html>
