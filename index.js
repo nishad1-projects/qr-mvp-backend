@@ -6,6 +6,7 @@ const QRCode = require("./models/QRCode");
 const Submission = require("./models/Submission");
 
 const app = express();
+app.set("view engine", "ejs");
 
 // Middleware
 app.use(express.json());
@@ -187,6 +188,21 @@ app.get("/admin", (req, res) => {
       </button>
     </form>
   `);
+});
+// Admin login page
+app.get("/admin/login", (req, res) => {
+  res.render("admin/login");
+});
+
+// Handle login (very simple MVP auth)
+app.post("/admin/login", (req, res) => {
+  const { password } = req.body;
+
+  if (password === "admin123") {
+    res.redirect("/admin/dashboard");
+  } else {
+    res.send("Wrong password");
+  }
 });
 
 
