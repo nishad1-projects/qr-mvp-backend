@@ -12,6 +12,15 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//admin security session
+const session = require("express-session");
+
+app.use(session({
+  secret: "qr-mvp-secret",
+  resave: false,
+  saveUninitialized: false
+}));
+
 
 // DB Connection
 mongoose.connect(process.env.MONGO_URI)
@@ -189,6 +198,7 @@ app.post("/admin/login", (req, res) => {
   const { password } = req.body;
 
   if (password === "admin123") {
+    req.session.isAdmin = true;
     res.redirect("/admin/dashboard");
   } else {
     res.send("Wrong password");
@@ -197,7 +207,17 @@ app.post("/admin/login", (req, res) => {
 
 // Admin dashboard page
 app.get("/admin/dashboard", async (req, res) => {
+  if (!req.session.isAdmin) {
+    return res.redirect("/admin/login");
+  }
   res.render("admin/dashboard");
+});
+
+//Added Logout admin
+app.get("/admin/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/admin/login");
+  });
 });
 
 
