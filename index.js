@@ -172,6 +172,12 @@ app.get("/listings", async (req, res) => {
 
   res.send(html);
 });
+// API listings (for WordPress / frontend)
+app.get("/api/listings", async (req, res) => {
+  const submissions = await Submission.find().sort({ submittedAt: -1 });
+  res.json(submissions);
+});
+
 
 // 🚨 NOTHING AFTER THIS LINE EXCEPT app.listen
 app.listen(5000, () => {
