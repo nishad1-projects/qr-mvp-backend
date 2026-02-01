@@ -117,10 +117,7 @@ app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
 
 //Thank you page design
 app.get("/thank-you", (req, res) => {
-  res.send(`
-    <h2>Thank You!</h2>
-    <p>Your apartment information has been submitted successfully.</p>
-  `);
+  res.render("thank-you");
 });
 
 app.use("/uploads", express.static("uploads"));
