@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 
 const SubmissionSchema = new mongoose.Schema({
-  qrCode: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
+  qrCode: String,
+
+  name: String,
+  phone: String,
+
+  address: String,
+  price: String,
+  size: Number,
+  bedrooms: String,
+  condition: String,
+
+  images: [String], // image filenames
+
   submittedAt: {
     type: Date,
     default: Date.now

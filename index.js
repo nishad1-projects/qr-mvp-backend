@@ -8,6 +8,25 @@ const Submission = require("./models/Submission");
 const app = express();
 app.set("view engine", "ejs");
 
+const multer = require("multer");
+const path = require("path");
+
+// Multer setup for image upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1E9);
+    cb(null, uniqueName + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB per image
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +39,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+app.use("/uploads", express.static("uploads"));
 
 
 // DB Connection
@@ -67,31 +88,41 @@ app.get("/qr/:code", async (req, res) => {
   res.render("submit-flat", { code });
 });
 
-// Submit form (lock QR)
-app.post("/submit/:code", async (req, res) => {
+// Submit form (lock QR + save apartment)
+app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
   const { code } = req.params;
-  const { name, phone } = req.body;
 
   const qr = await QRCode.findOne({ code });
-
-  if (!qr) {
-    return res.send("❌ Invalid QR code");
+  if (!qr || qr.isUsed) {
+    return res.send("Invalid or already used QR");
   }
 
-  if (qr.isUsed) {
-    return res.send("⚠️ This QR has already been used.");
-  }
+  const imageFiles = req.files.map(file => file.filename);
 
   await Submission.create({
-  qrCode: code,
-  name,
-  phone
-});
+    qrCode: code,
+    name: req.body.name,
+    phone: req.body.phone,
+    address: req.body.address,
+    price: req.body.price,
+    size: req.body.size,
+    bedrooms: req.body.bedrooms,
+    condition: req.body.condition,
+    images: imageFiles
+  });
 
   qr.isUsed = true;
   await qr.save();
 
-  res.send("✅ Thank you! Your information has been submitted.");
+  res.redirect("/thank-you");
+});
+
+//Thank you page design
+app.get("/thank-you", (req, res) => {
+  res.send(`
+    <h2>Thank You!</h2>
+    <p>Your apartment information has been submitted successfully.</p>
+  `);
 });
 
 // Debug: view submissions
