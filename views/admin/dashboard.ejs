@@ -24,11 +24,13 @@
 <h3>Generated QR Codes</h3>
 <table>
   <tr>
+    <th>Sl No.</th>
     <th>QR Code</th>
     <th>Status</th>
   </tr>
   <% qrs.forEach(qr => { %>
     <tr>
+      <td><%= index + 1 %></td>
       <td><%= qr.code %></td>
       <td><%= qr.isUsed ? "Used" : "Unused" %></td>
     </tr>
