@@ -88,36 +88,31 @@ app.get("/qr/:code", async (req, res) => {
 
 // Submit form (lock QR + save apartment)
 app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
-  try {
-    const { code } = req.params;
+  const { code } = req.params;
 
-    const qr = await QRCode.findOne({ code });
-    if (!qr || qr.isUsed) {
-      return res.send("Invalid or already used QR");
-    }
-
-    const imageFiles = req.files.map(file => file.filename);
-
-    await Submission.create({
-      qrCode: code,
-      name: req.body.name,
-      phone: req.body.phone,
-      address: req.body.address,
-      price: req.body.price,
-      size: req.body.size,
-      bedrooms: req.body.bedrooms,
-      condition: req.body.condition,
-      images: imageFiles
-    });
-
-    qr.isUsed = true;
-    await qr.save();
-
-    res.redirect("/thank-you");
-  } catch (err) {
-    console.error("Submit error:", err);
-    res.status(500).send("Something went wrong. Please try again.");
+  const qr = await QRCode.findOne({ code });
+  if (!qr || qr.isUsed) {
+    return res.send("Invalid or already used QR");
   }
+
+  const imageFiles = req.files.map(file => file.filename);
+
+  await Submission.create({
+    qrCode: code,
+    name: req.body.name,
+    phone: req.body.phone,
+    address: req.body.address,
+    price: req.body.price,
+    size: req.body.size,
+    bedrooms: req.body.bedrooms,
+    condition: req.body.condition,
+    images: imageFiles
+  });
+
+  qr.isUsed = true;
+  await qr.save();
+
+  res.redirect("/thank-you");
 });
 
 //Thank you page design
