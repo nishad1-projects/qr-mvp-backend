@@ -45,7 +45,7 @@ app.post("/generate-qr", async (req, res) => {
   res.json({
     message: "QR created",
     code: randomCode,
-    url: `http://localhost:5000/qr/${randomCode}`
+    url: `https://qr-mvp-backend.onrender.com/qr/${randomCode}`
   });
 });
 
