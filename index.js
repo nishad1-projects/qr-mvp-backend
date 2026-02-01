@@ -205,9 +205,6 @@ app.post("/admin/login", (req, res) => {
   }
 });
 
-const QRCode = require("./models/QRCode");
-const Submission = require("./models/Submission");
-
 // Admin dashboard page (with data)
 app.get("/admin/dashboard", async (req, res) => {
   if (!req.session.isAdmin) {
