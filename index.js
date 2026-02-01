@@ -52,11 +52,18 @@ app.post("/generate-qr", async (req, res) => {
 // Scan QR (show form until submitted)
 app.get("/qr/:code", async (req, res) => {
   const { code } = req.params;
+
   const qr = await QRCode.findOne({ code });
 
-  if (!qr) return res.send("❌ Invalid QR code");
-  if (qr.isUsed) return res.send("⚠️ Sorry, this QR code has already been used.");
+  if (!qr) {
+    return res.send("❌ Invalid QR code");
+  }
 
+  if (qr.isUsed) {
+    return res.send("⚠️ Sorry, this QR code has already been used.");
+  }
+
+  // Render dedicated submission page
   res.render("submit-flat", { code });
 });
 
