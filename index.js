@@ -52,25 +52,12 @@ app.post("/generate-qr", async (req, res) => {
 // Scan QR (show form until submitted)
 app.get("/qr/:code", async (req, res) => {
   const { code } = req.params;
-
   const qr = await QRCode.findOne({ code });
 
-  if (!qr) {
-    return res.send("❌ Invalid QR code");
-  }
+  if (!qr) return res.send("❌ Invalid QR code");
+  if (qr.isUsed) return res.send("⚠️ Sorry, this QR code has already been used.");
 
-  if (qr.isUsed) {
-    return res.send("⚠️ Sorry, this QR code has already been used.");
-  }
-
-  res.send(`
-    <h2>Submit Your Information</h2>
-    <form method="POST" action="/submit/${code}">
-      <input name="name" placeholder="Your Name" required /><br/><br/>
-      <input name="phone" placeholder="Phone Number" required /><br/><br/>
-      <button type="submit">Submit</button>
-    </form>
-  `);
+  res.render("submit-flat", { code });
 });
 
 // Submit form (lock QR)
