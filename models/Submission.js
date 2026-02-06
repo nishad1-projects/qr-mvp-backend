@@ -10,6 +10,7 @@ const SubmissionSchema = new mongoose.Schema({
   price: String,
   size: Number,
   bedrooms: String,
+  baths: String,
   condition: String,
 
   images: [String], // image filenames
