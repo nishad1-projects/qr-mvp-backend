@@ -7,6 +7,7 @@ const SubmissionSchema = new mongoose.Schema({
   phone: String,
 
   address: String,
+  ownername: String,
   price: String,
   size: Number,
   bedrooms: String,
