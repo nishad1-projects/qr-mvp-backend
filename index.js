@@ -102,9 +102,11 @@ app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
     name: req.body.name,
     phone: req.body.phone,
     address: req.body.address,
+    ownerName: req.body.ownername,
     price: req.body.price,
     size: req.body.size,
     bedrooms: req.body.bedrooms,
+    baths: req.body.baths,
     condition: req.body.condition,
     images: imageFiles
   });
