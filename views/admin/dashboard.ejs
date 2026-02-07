@@ -43,14 +43,14 @@
 <h3>Submissions</h3>
 <table>
   <tr>
-    <th>Name</th>
+    <th>Owner Name</th>
     <th>Phone</th>
     <th>QR Code</th>
     <th>Date</th>
   </tr>
   <% submissions.forEach(s => { %>
     <tr>
-      <td><%= s.name %></td>
+      <td><%= s.ownername %></td>
       <td><%= s.phone %></td>
       <td><%= s.qrCode %></td>
       <td><%= new Date(s.submittedAt).toLocaleString() %></td>
