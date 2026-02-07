@@ -4,11 +4,11 @@ const SubmissionSchema = new mongoose.Schema({
   qrCode: String,
 
   name: String,
-  phone: String,
+  phone: Number,
 
   address: String,
   ownerName: String,
-  price: String,
+  price: Number,
   size: Number,
   bedrooms: String,
   baths: String,

@@ -87,7 +87,7 @@
     <input type="text" name="name" required />
 
     <label>Phone Number</label>
-    <input type="text" name="phone" required />
+    <input type="number" name="phone" required />
 
     <label>Apartment Address</label>
     <input type="text" name="address" required />
@@ -96,7 +96,7 @@
     <input type="text" name="ownername" required />
 
     <label>Apartment Price (Approx)</label>
-    <input type="text" name="price" placeholder="e.g. 220,000 BDT" required />
+    <input type="number" name="price" placeholder="e.g. 220,000 BDT" required />
 
     <label>Size (sqft)</label>
     <input type="number" name="size" placeholder="e.g. 1450" required />
@@ -104,9 +104,11 @@
     <label>Bedrooms</label>
     <select name="bedrooms" required>
       <option value="">Select</option>
+      <option value="1">1 Bedrooms</option>
       <option value="2">2 Bedrooms</option>
       <option value="3">3 Bedrooms</option>
       <option value="4">4 Bedrooms</option>
+      <option value="5">5 Bedrooms</option>
     </select>
 
     <label>Bathrooms</label>
@@ -115,6 +117,7 @@
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
+      <option value="4">4</option>
     </select>
 
     <label>Condition</label>
@@ -122,6 +125,7 @@
       <option value="">Select</option>
       <option value="Fully Ready Flat">Fully Ready Flat</option>
       <option value="Ready Flat + Furnished">Ready Flat + Furnished</option>
+      <option value="Under Construction">Under Construction</option>
     </select>
 
     <button type="submit">Submit Flat</button>
