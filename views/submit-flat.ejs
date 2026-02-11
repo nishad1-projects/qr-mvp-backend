@@ -151,9 +151,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (imageInput) {
     imageInput.addEventListener("change", function() {
-      if (this.files.length > 5) {
+      const files = this.files;
+      const maxFiles = 5;
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+      if (files.length > maxFiles) {
         alert("You can upload maximum 5 images only.");
         this.value = "";
+        return;
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        if (!allowedTypes.includes(files[i].type)) {
+          alert("Only JPG, JPEG and PNG images are allowed.");
+          this.value = "";
+          return;
+        }
+
+        if (files[i].size > maxSize) {
+          alert("Maximum 5MB per image size is acceptable.");
+          this.value = "";
+          return;
+        }
       }
     });
   }
