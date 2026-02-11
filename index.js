@@ -196,7 +196,8 @@ app.get("/listings", async (req, res) => {
       <div class="card">
         <p><span class="label">Name:</span> ${item.name}</p>
         <p><span class="label">Phone:</span> ${item.phone}</p>
-        <p><span class="label">QR Code:</span> ${item.qrCode}</p>
+        <p><span class="label">QR Code:</span> ${item.qrCode}
+        <p><span class="label">Owner Name:</span> ${item.ownerName}</p>
       </div>
     `;
   });
