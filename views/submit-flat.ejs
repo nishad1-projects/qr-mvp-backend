@@ -866,8 +866,8 @@
           }
 
           selectedFiles = newFiles;
-          updateGallery();
-          this.value = ''; // Reset input so same file can be selected again if removed
+          this.value = ''; // Reset input first so same file can be selected again
+          updateGallery(); // Then sync the programmatic files list
         });
       }
 
