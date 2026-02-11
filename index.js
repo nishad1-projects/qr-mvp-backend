@@ -2,6 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const { v2: cloudinary } = require("cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const QRCode = require("./models/QRCode");
 const Submission = require("./models/Submission");
 
@@ -11,20 +21,18 @@ app.set("view engine", "ejs");
 const multer = require("multer");
 const path = require("path");
 
-// Multer setup for image upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
+// Cloudinary storage setup
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "apartments", // folder name in Cloudinary
+    allowed_formats: ["jpg", "jpeg", "png"],
   },
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1E9);
-    cb(null, uniqueName + path.extname(file.originalname));
-  }
 });
 
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 } // 5MB per image
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB per image
 });
 
 // Middleware
@@ -95,7 +103,7 @@ app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
     return res.send("Invalid or already used QR");
   }
 
-  const imageFiles = req.files.map(file => file.filename);
+  const imageFiles = req.files.map(file => file.path);
 
   await Submission.create({
     qrCode: code,
@@ -121,8 +129,6 @@ app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
 app.get("/thank-you", (req, res) => {
   res.render("thank-you");
 });
-
-app.use("/uploads", express.static("uploads"));
 
 // Debug: view submissions
 app.get("/debug/submissions", async (req, res) => {
