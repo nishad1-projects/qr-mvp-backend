@@ -145,5 +145,20 @@
   © 2026 Your Company Name. All rights reserved.
 </footer>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const imageInput = document.querySelector('input[name="images"]');
+
+  if (imageInput) {
+    imageInput.addEventListener("change", function() {
+      if (this.files.length > 5) {
+        alert("You can upload maximum 5 images only.");
+        this.value = "";
+      }
+    });
+  }
+});
+</script>
+
 </body>
 </html>
