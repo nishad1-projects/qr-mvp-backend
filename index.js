@@ -18,9 +18,6 @@ const Submission = require("./models/Submission");
 const app = express();
 app.set("view engine", "ejs");
 
-const multer = require("multer");
-const path = require("path");
-
 // Cloudinary storage setup
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
@@ -72,7 +69,7 @@ app.post("/generate-qr", async (req, res) => {
   res.json({
     message: "QR created",
     code: randomCode,
-    url: `https://qr-mvp-backend.onrender.com/qr/${randomCode}`
+    url: `https://qr.wctw.info/qr/${randomCode}`
   });
 });
 
