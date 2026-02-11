@@ -29,7 +29,16 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB per image
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only JPG, JPEG, and PNG images are allowed!"));
+    }
+  }
 });
 
 // Middleware
@@ -250,6 +259,33 @@ app.get("/admin/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/admin/login");
   });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  if (err.message.includes("Only JPG")) {
+    return res.send(`
+      <h3 style="color:red;text-align:center;margin-top:50px;">
+        ❌ Only JPG, JPEG, and PNG images are allowed!
+      </h3>
+      <div style="text-align:center;margin-top:20px;">
+        <a href="javascript:history.back()">Go Back</a>
+      </div>
+    `);
+  }
+
+  if (err.code === "LIMIT_FILE_SIZE") {
+    return res.send(`
+      <h3 style="color:red;text-align:center;margin-top:50px;">
+        ❌ Image must be under 5MB!
+      </h3>
+      <div style="text-align:center;margin-top:20px;">
+        <a href="javascript:history.back()">Go Back</a>
+      </div>
+    `);
+  }
+
+  next(err);
 });
 
 

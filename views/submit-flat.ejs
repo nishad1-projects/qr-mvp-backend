@@ -81,7 +81,7 @@
   <form method="POST" action="/submit/<%= code %>" enctype="multipart/form-data">
 
     <label>Apartment Images</label>
-    <input type="file" name="images" multiple required />
+    <input type="file" name="images" multiple accept=".jpg,.jpeg,.png" required />
 
     <label>Apartment Name</label>
     <input type="text" name="name" required />
