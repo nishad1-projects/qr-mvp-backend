@@ -1,184 +1,938 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Submit Your Apartment</title>
-
+  <title>Submit Your Apartment - SaleFlats.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
+    :root {
+      --primary-color: #0f172a;
+      --accent-color: #22c55e;
+      --accent-hover: #16a34a;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
-    header, footer {
-      background: #0f172a;
-      color: #fff;
-      padding: 15px 20px;
-      text-align: center;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+
+    .top-logo {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .top-logo img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
     }
 
     .container {
-      max-width: 700px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow);
     }
 
-    h2 {
+    .header-text {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 15px;
+    .header-text h1 {
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
     }
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    .branding {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 8px;
     }
 
-  small {
-  font-size: 13px;
-  line-height: 1.5;
-  }
+    .branding span.company {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 25px;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      font-size: 16px;
+    .branding span.tld {
+      background: var(--accent-color);
+      color: white;
+      padding: 2px 8px;
       border-radius: 6px;
+      font-size: 14px;
+      margin-left: 4px;
+      font-weight: 700;
+    }
+
+    .sub-info {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .file-upload-area {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .file-upload-area:hover {
+      border-color: var(--accent-color);
+    }
+
+    .file-upload-area input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
       cursor: pointer;
     }
 
-    button:hover {
-      background: #1d4ed8;
+    .upload-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
     }
 
-    footer {
-      margin-top: 40px;
+    .upload-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .grid-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-row-three {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 600px;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    .modal-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .close-modal {
+      background: var(--bg-color);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .close-modal:hover {
+      background: var(--border-color);
+      color: var(--text-main);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .preview-item {
+      margin-bottom: 8px;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .preview-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-main);
+      padding: 8px 12px;
+      background: var(--bg-color);
+      border-radius: 8px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .preview-full {
+      grid-column: span 2;
+    }
+
+    .preview-img-count {
+      background: #ecfdf5;
+      padding: 12px 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 14px;
+      color: var(--accent-hover);
+      margin-bottom: 24px;
+      font-weight: 600;
+      border: 1px solid #d1fae5;
+    }
+
+    /* Refined Phone Input Styles */
+    .phone-input-container {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .phone-prefix-box {
+      background: #f1f5f9;
+      padding: 0 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+      height: 50px;
+    }
+
+    .phone-prefix-box svg {
+      width: 20px;
+      height: 20px;
+      color: var(--text-main);
+    }
+
+    .phone-input-field {
+      flex: 1;
+    }
+
+    .phone-input-field input {
+      background: #f1f5f9 !important;
+      border: 1px solid var(--border-color) !important;
+      padding: 0 16px !important;
+      border-radius: 12px !important;
+      font-weight: 600 !important;
+      color: var(--text-main) !important;
+      height: 50px !important;
+      font-size: 15px !important;
+      width: 100%;
+    }
+
+    .phone-input-field input::placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    /* Video Embed Styles */
+    .video-section {
+      margin-top: 30px;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      box-shadow: var(--shadow);
+    }
+
+    .video-section iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Image Gallery Styles */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .image-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      background: var(--bg-color);
+    }
+
+    .image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .remove-image {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+      z-index: 10;
+    }
+
+    .remove-image:hover {
+      transform: scale(1.1);
+    }
+
+    .add-more-box {
+      aspect-ratio: 1;
+      border: 2px dashed var(--border-color);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 24px;
+      background: var(--bg-color);
+      transition: all 0.2s;
+    }
+
+    .add-more-box:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      background: #f0fdf4;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .btn {
+      padding: 14px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+      border: none;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary-color);
+      background: transparent;
+      color: var(--primary-color);
+    }
+
+    .btn-solid {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .app-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .app-btn {
+      background: #e11d48;
+      color: white;
+      padding: 16px;
+      border-radius: 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 12px;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #google_translate_element {
+      min-height: 40px;
+    }
+
+    .goog-te-gadget {
+      font-family: inherit !important;
+      font-size: 14px !important;
+      color: var(--text-muted) !important;
+    }
+
+    .goog-te-gadget-simple {
+      background-color: white !important;
+      border: 1px solid var(--border-color) !important;
+      padding: 6px 12px !important;
+      border-radius: 8px !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+
+    .goog-te-menu-value span {
+      color: var(--text-main) !important;
+      font-weight: 500 !important;
+    }
+
+    .footer-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+
+      .grid-row,
+      .grid-row-three,
+      .btn-group,
+      .app-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 20px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h3>Apartment Submission</h3>
-</header>
+  <div class="top-logo">
+    <a href="#"><img src="https://wctw.info/wp-content/uploads/2026/02/Untitled-design-1.png" alt="Company Logo" /></a>
+  </div>
 
-<div class="container">
-  <h2>Submit Your Apartment Information</h2>
+  <div class="container">
+    <div class="header-text">
+      <h1>SUBMIT YOUR APARTMENT</h1>
+      <div class="branding">
+        <span class="company">SALEFLATS</span>
+        <span class="tld">.COM</span>
+      </div>
+      <p class="sub-info">Fill in the details below to list your property on our platform.</p>
+    </div>
 
-  <form method="POST" action="/submit/<%= code %>" enctype="multipart/form-data">
+    <form method="POST" action="/submit/<%= code %>" enctype="multipart/form-data">
+      <div class="form-group">
+        <label class="form-label">Apartment Images</label>
+        <div class="file-upload-area" id="dropZone">
+          <div class="upload-icon">📷</div>
+          <p class="upload-text">Click to upload (JPG, PNG - Max 5MB)</p>
+          <input type="file" name="images" id="imageInput" multiple accept=".jpg,.jpeg,.png" required />
+        </div>
+        <div class="image-gallery" id="imageGallery">
+          <!-- Thumbnails will appear here -->
+        </div>
+      </div>
 
-    <label>Apartment Images</label>
-<input type="file" name="images" multiple accept=".jpg,.jpeg,.png" required />
+      <div class="grid-row">
+        <div class="form-group">
+          <label class="form-label">Apartment Name</label>
+          <input type="text" name="name" placeholder="e.g. Skyline Residency Farmgate" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="phone-input-container">
+            <div class="phone-prefix-box">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                </path>
+              </svg>
+              <span>+880</span>
+            </div>
+            <div class="phone-input-field">
+              <input type="number" name="phone" placeholder="1XXX-XXXXXX" required />
+            </div>
+          </div>
+        </div>
+      </div>
 
-<small style="color:#666; display:block; margin-top:6px;">
-  • Only JPG, JPEG and PNG images are allowed.<br/>
-  • Maximum 5MB per image.
-</small>
+      <div class="form-group">
+        <label class="form-label">Apartment Address</label>
+        <textarea name="address" rows="3" placeholder="Street, Area, City" required style="resize: none;"></textarea>
+      </div>
 
-    <label>Apartment Name</label>
-    <input type="text" name="name" required />
+      <div class="grid-row">
+        <div class="form-group">
+          <label class="form-label">Owner Name</label>
+          <input type="text" name="ownername" placeholder="Full Name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Price (Approx)</label>
+          <input type="number" name="price" placeholder="e.g. 10,00,000 BDT" required />
+        </div>
+      </div>
 
-    <label>Phone Number</label>
-    <input type="number" name="phone" required />
+      <div class="grid-row-three">
+        <div class="form-group">
+          <label class="form-label">Size (sqft)</label>
+          <input type="number" name="size" placeholder="2500" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bedrooms</label>
+          <select name="bedrooms" required>
+            <option value="">Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bathrooms</label>
+          <select name="baths" required>
+            <option value="">Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+      </div>
 
-    <label>Apartment Address</label>
-    <input type="text" name="address" required />
+      <div class="form-group">
+        <label class="form-label">Condition</label>
+        <select name="condition" required>
+          <option value="Fully Ready Flat">Fully Ready Flat</option>
+          <option value="Ready Flat + Furnished">Ready Flat + Furnished</option>
+          <option value="Under Construction">Under Construction</option>
+        </select>
+      </div>
 
-    <label>Owner Name</label>
-    <input type="text" name="ownername" required />
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline" id="previewBtn">Preview Listing 👁</button>
+        <button type="submit" class="btn btn-solid">Submit Property</button>
+      </div>
+      <p class="note">Please note: double check the information, you can't change it after submission.</p>
 
-    <label>Apartment Price (Approx)</label>
-    <input type="number" name="price" placeholder="e.g. 220,000 BDT" required />
+      <div class="video-section">
+        <iframe src="https://www.youtube.com/embed/ua4MuPQRLxg?si=fINkqPGJ4UGeaund" title="Product Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </form>
 
-    <label>Size (sqft)</label>
-    <input type="number" name="size" placeholder="e.g. 1450" required />
+    <div class="app-buttons">
+      <a href="#" class="app-btn">
+        <span><i class="fa-brands fa-google-play"></i></span>
+        <span>Download the SaleFlats App</span>
+      </a>
+      <a href="#" class="app-btn">
+        <span><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M17.537 12.625a4.421 4.421 0 0 0 2.684 4.047 10.96 10.96 0 0 1-1.384 2.845c-.834 1.218-1.7 2.432-3.062 2.457-1.34.025-1.77-.794-3.3-.794-1.531 0-2.01.769-3.275.82-1.316.049-2.317-1.318-3.158-2.532-1.72-2.484-3.032-7.017-1.27-10.077A4.9 4.9 0 0 1 8.91 6.884c1.292-.025 2.51.869 3.3.869.789 0 2.27-1.075 3.828-.917a4.67 4.67 0 0 1 3.66 1.984 4.524 4.524 0 0 0-2.16 3.805m-2.52-7.432A4.4 4.4 0 0 0 16.06 2a4.482 4.482 0 0 0-2.945 1.516 4.185 4.185 0 0 0-1.061 3.093 3.708 3.708 0 0 0 2.967-1.416Z" />
+          </svg></span>
+        <span>Download the SaleFlats App (IOS)</span>
+      </a>
+    </div>
+  </div>
 
-    <label>Bedrooms</label>
-    <select name="bedrooms" required>
-      <option value="">Select</option>
-      <option value="1">1 Bedrooms</option>
-      <option value="2">2 Bedrooms</option>
-      <option value="3">3 Bedrooms</option>
-      <option value="4">4 Bedrooms</option>
-      <option value="5">5 Bedrooms</option>
-    </select>
+  <!-- Preview Modal -->
+  <div class="modal-overlay" id="previewModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Listing Preview</h2>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
 
-    <label>Bathrooms</label>
-    <select name="baths" required>
-      <option value="">Select</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
+      <div class="preview-img-count">
+        <span>📸</span>
+        <span id="p-images">No images selected</span>
+      </div>
 
-    <label>Condition</label>
-    <select name="condition" required>
-      <option value="Fully Ready Flat">Fully Ready Flat</option>
-      <option value="Ready Flat + Furnished">Ready Flat + Furnished</option>
-      <option value="Under Construction">Under Construction</option>
-    </select>
+      <div class="preview-grid">
+        <div class="preview-item">
+          <div class="preview-label">Apartment Name</div>
+          <div class="preview-value" id="p-name">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Phone Number</div>
+          <div class="preview-value" id="p-phone">Not provided</div>
+        </div>
+        <div class="preview-item preview-full">
+          <div class="preview-label">Apartment Address</div>
+          <div class="preview-value" id="p-address">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Owner Name</div>
+          <div class="preview-value" id="p-owner">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Price</div>
+          <div class="preview-value" id="p-price">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Size (sqft)</div>
+          <div class="preview-value" id="p-size">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Bedrooms</div>
+          <div class="preview-value" id="p-bedrooms">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Bathrooms</div>
+          <div class="preview-value" id="p-baths">Not provided</div>
+        </div>
+        <div class="preview-item">
+          <div class="preview-label">Condition</div>
+          <div class="preview-value" id="p-condition">Not provided</div>
+        </div>
+      </div>
 
-    <button type="submit">Submit Flat</button>
-  </form>
-</div>
+      <div style="margin-top: 30px;">
+        <button type="button" class="btn btn-solid" style="width: 100%;" id="closeModalBtn">Close Preview</button>
+      </div>
+    </div>
+  </div>
 
-<footer>
-  © 2026 Your Company Name. All rights reserved.
-</footer>
+  <footer class="footer">
+    <p>Copyright © 2026 SaleFlats.com. All rights reserved. You have access this page with QR url</p>
+    <div class="footer-links">
+      <a href="">🏠 Urgent,</a>
+      <a href="#" style="text-decoration: underline;">SaleFlats.com,</a>
+      <span>or Support,</span>
+      <a href="#" style="text-decoration: underline;">Contact us,</a>
+      <span>-</span>
+      <a href="#" style="text-decoration: underline;">Play store</a>
+    </div>
+    <div class="footer-logo">
+      <div id="google_translate_element"></div>
+      <div style="font-size: 10px; color: var(--text-muted); display: flex; align-items: center; gap: 4px;">
+        <span style="background: #4285f4; color: white; padding: 1px 3px; border-radius: 2px;">G</span> Translate দ্বারা
+        পরিচালিত
+      </div>
+    </div>
+  </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const imageInput = document.querySelector('input[name="images"]');
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const imageInput = document.getElementById('imageInput');
+      const imageGallery = document.getElementById('imageGallery');
+      const form = document.querySelector('form');
+      const uploadText = document.querySelector('.upload-text');
 
-  if (imageInput) {
-    imageInput.addEventListener("change", function() {
-      const files = this.files;
-      const maxFiles = 5;
-      const maxSize = 5 * 1024 * 1024; // 5MB
-      const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+      let selectedFiles = [];
 
-      if (files.length > maxFiles) {
-        alert("You can upload maximum 5 images only.");
-        this.value = "";
-        return;
-      }
+      const updateGallery = () => {
+        imageGallery.innerHTML = '';
 
-      for (let i = 0; i < files.length; i++) {
-        if (!allowedTypes.includes(files[i].type)) {
-          alert("Only JPG, JPEG and PNG images are allowed.");
-          this.value = "";
-          return;
+        selectedFiles.forEach((file, index) => {
+          const reader = new FileReader();
+          const item = document.createElement('div');
+          item.className = 'image-item';
+
+          const removeBtn = document.createElement('button');
+          removeBtn.className = 'remove-image';
+          removeBtn.innerHTML = '&times;';
+          removeBtn.type = 'button';
+          removeBtn.onclick = (e) => {
+            e.stopPropagation();
+            removeFile(index);
+          };
+
+          reader.onload = (e) => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            item.appendChild(img);
+            item.appendChild(removeBtn);
+          };
+
+          reader.readAsDataURL(file);
+          imageGallery.appendChild(item);
+        });
+
+        if (selectedFiles.length < 5) {
+          const addMore = document.createElement('div');
+          addMore.className = 'add-more-box';
+          addMore.innerHTML = '+';
+          addMore.onclick = () => imageInput.click();
+          imageGallery.appendChild(addMore);
         }
 
-        if (files[i].size > maxSize) {
-          alert("Maximum 5MB per image size is acceptable.");
-          this.value = "";
-          return;
-        }
+        uploadText.textContent = selectedFiles.length > 0 ? `${selectedFiles.length} files selected` : "Click to upload (JPG, PNG - Max 5MB)";
+        document.getElementById('p-images').textContent = selectedFiles.length > 0 ? `${selectedFiles.length} images selected for upload` : "No images selected";
+
+        // Sync with actual input
+        const dataTransfer = new DataTransfer();
+        selectedFiles.forEach(file => dataTransfer.items.add(file));
+        imageInput.files = dataTransfer.files;
+      };
+
+      const removeFile = (index) => {
+        selectedFiles.splice(index, 1);
+        updateGallery();
+      };
+
+      if (imageInput) {
+        imageInput.addEventListener("change", function (e) {
+          const files = Array.from(e.target.files);
+          const maxFiles = 5;
+          const maxSize = 5 * 1024 * 1024; // 5MB
+          const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+          let newFiles = [...selectedFiles];
+
+          for (let file of files) {
+            if (newFiles.length >= maxFiles) {
+              alert("You can upload maximum 5 images only.");
+              break;
+            }
+            if (!allowedTypes.includes(file.type)) {
+              alert(`${file.name} is not a valid image type.`);
+              continue;
+            }
+            if (file.size > maxSize) {
+              alert(`${file.name} is too large (max 5MB).`);
+              continue;
+            }
+            newFiles.push(file);
+          }
+
+          selectedFiles = newFiles;
+          updateGallery();
+          this.value = ''; // Reset input so same file can be selected again if removed
+        });
       }
+
+      // Preview Functionality
+      const previewBtn = document.getElementById('previewBtn');
+      const previewModal = document.getElementById('previewModal');
+      const closeModal = document.getElementById('closeModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+
+      const showPreview = () => {
+        // Collect form data
+        const name = document.querySelector('input[name="name"]').value;
+        const phone = document.querySelector('input[name="phone"]').value;
+        const address = document.querySelector('textarea[name="address"]').value;
+        const owner = document.querySelector('input[name="ownername"]').value;
+        const price = document.querySelector('input[name="price"]').value;
+        const size = document.querySelector('input[name="size"]').value;
+        const bedrooms = document.querySelector('select[name="bedrooms"]').value;
+        const baths = document.querySelector('select[name="baths"]').value;
+        const condition = document.querySelector('select[name="condition"]').value;
+
+        // Populate modal
+        document.getElementById('p-name').textContent = name || "Not provided";
+        document.getElementById('p-phone').textContent = phone ? "+880 " + phone : "Not provided";
+        document.getElementById('p-address').textContent = address || "Not provided";
+        document.getElementById('p-owner').textContent = owner || "Not provided";
+        document.getElementById('p-price').textContent = price ? price + " BDT" : "Not provided";
+        document.getElementById('p-size').textContent = size ? size + " sqft" : "Not provided";
+        document.getElementById('p-bedrooms').textContent = bedrooms || "Not provided";
+        document.getElementById('p-baths').textContent = baths || "Not provided";
+        document.getElementById('p-condition').textContent = condition || "Not provided";
+
+        // Show modal
+        previewModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      };
+
+      const hidePreview = () => {
+        previewModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      };
+
+      previewBtn.addEventListener('click', showPreview);
+      closeModal.addEventListener('click', hidePreview);
+      closeModalBtn.addEventListener('click', hidePreview);
+
+      previewModal.addEventListener('click', (e) => {
+        if (e.target === previewModal) hidePreview();
+      });
+
+      // Initial call to set up "+" box
+      updateGallery();
     });
-  }
-});
-</script>
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,bn',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
+
 </html>
