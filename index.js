@@ -97,7 +97,10 @@ app.get("/qr/:code", async (req, res) => {
 }
 
   // Render dedicated submission page
-  res.render("submit-flat", { code });
+  res.render("submit-flat", {
+  code,
+  demo: req.query.demo
+});
 });
 
 // Submit form (lock QR + save apartment)
@@ -106,10 +109,7 @@ app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
 
   const qr = await QRCode.findOne({ code });
   if (qr.isDemo) {
-  return res.render("submit-flat", {
-    code,
-    error: "⚠️ Sorry, this is a demo QR code. This won't be submitted."
-  });
+  return res.redirect(`/qr/${code}?demo=true`);
 }
   if (!qr || qr.isUsed) {
     return res.send("Invalid or already used QR");
