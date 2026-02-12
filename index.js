@@ -78,7 +78,7 @@ app.post("/generate-qr", async (req, res) => {
   res.json({
     message: "QR created",
     code: randomCode,
-    url: `https://qr.wctw.info/qr/${randomCode}`
+    url: `https://app.saleflats.com/qr/${randomCode}`
   });
 });
 
