@@ -105,6 +105,12 @@ app.post("/submit/:code", upload.array("images", 5), async (req, res) => {
   const { code } = req.params;
 
   const qr = await QRCode.findOne({ code });
+  if (qr.isDemo) {
+  return res.render("submit-flat", {
+    code,
+    error: "⚠️ Sorry, this is a demo QR code. This won't be submitted."
+  });
+}
   if (!qr || qr.isUsed) {
     return res.send("Invalid or already used QR");
   }
