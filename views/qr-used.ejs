@@ -237,6 +237,58 @@
             box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3);
         }
 
+        /* Recent Work Gallery Styles */
+        .recent-work-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .recent-work-title {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .recent-work-title h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--primary-color);
+            letter-spacing: 0.02em;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .work-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .work-item {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 4/3;
+            background: #eee;
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .work-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .work-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .footer {
             text-align: center;
             margin-top: 60px;
@@ -377,6 +429,22 @@
                     </svg></span>
                 <span>Download the SaleFlats App (IOS)</span>
             </a>
+        </div>
+
+        <div class="recent-work-section">
+            <div class="recent-work-title">
+                <h3>SALEFLATS QR STICKER: QR THAT SIMPLY FIT ANYWHERE</h3>
+            </div>
+            <div class="work-gallery">
+                <div class="work-item">
+                    <img src="https://wctw.info/wp-content/uploads/2026/02/IMG_20260212_170853.jpg-1-scaled.jpeg"
+                        alt="Recent Work 1">
+                </div>
+                <div class="work-item">
+                    <img src="https://wctw.info/wp-content/uploads/2026/02/IMG_20260212_170922.jpg-1-scaled.jpeg"
+                        alt="Recent Work 2">
+                </div>
+            </div>
         </div>
     </div>
 
