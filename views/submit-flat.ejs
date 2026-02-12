@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
@@ -90,11 +91,52 @@
     .branding span.tld {
       background: var(--accent-color);
       color: white;
-      padding: 2px 8px;
+      padding: 0;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 18px;
       margin-left: 4px;
       font-weight: 700;
+      height: 32px;
+      width: 56px;
+      /* Fixed width to prevent layout jump */
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+    }
+
+    .tld-wrapper {
+      display: flex;
+      flex-direction: row;
+      width: 200%;
+      height: 100%;
+      animation: slideTldHorizontal 4s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+    }
+
+    .tld-item {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    @keyframes slideTldHorizontal {
+
+      0%,
+      40% {
+        transform: translateX(0);
+      }
+
+      50%,
+      90% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
     }
 
     .sub-info {
@@ -581,7 +623,12 @@
       <h1>SUBMIT YOUR APARTMENT</h1>
       <div class="branding">
         <span class="company">SALEFLATS</span>
-        <span class="tld">.COM</span>
+        <span class="tld">
+          <span class="tld-wrapper">
+            <span class="tld-item">.COM</span>
+            <span class="tld-item">APP</span>
+          </span>
+        </span>
       </div>
       <p class="sub-info">Fill in the details below to list your property on our platform.</p>
     </div>

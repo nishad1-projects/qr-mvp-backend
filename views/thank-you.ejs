@@ -76,10 +76,6 @@
             margin: 0 auto 32px;
         }
 
-        .en-section {
-            font-family: 'Inter', sans-serif;
-        }
-
         .thank-you-title {
             font-size: 42px;
             font-weight: 900;
@@ -144,12 +140,6 @@
             font-weight: 500;
         }
 
-        .bottom-divider {
-            border-bottom: 1px solid #f8fafc;
-            margin: 40px auto 0;
-            max-width: 600px;
-        }
-
         .app-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -176,6 +166,70 @@
 
         .app-btn:hover {
             transform: translateY(-2px);
+        }
+
+        .branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .branding span.company {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .branding span.tld {
+            background: #22c55e;
+            color: white;
+            padding: 0;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-left: 4px;
+            font-weight: 700;
+            height: 32px;
+            width: 56px;
+            /* Fixed width to prevent layout jump */
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        .tld-wrapper {
+            display: flex;
+            flex-direction: row;
+            width: 200%;
+            height: 100%;
+            animation: slideTldHorizontal 4s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+        }
+
+        .tld-item {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        @keyframes slideTldHorizontal {
+
+            0%,
+            40% {
+                transform: translateX(0);
+            }
+
+            50%,
+            90% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         .footer {
@@ -265,17 +319,16 @@
     </div>
 
     <div class="container">
+        <div class="branding">
+                <span class="company">SALEFLATS</span>
+                <span class="tld">
+                    <span class="tld-wrapper">
+                        <span class="tld-item">.COM</span>
+                        <span class="tld-item">APP</span>
+                    </span>
+                </span>
+            </div>
         <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-
-        <div class="en-section">
-            <h1 class="thank-you-title">THANK YOU!</h1>
-            <p class="thank-you-msg">Your apartment information has been submitted successfully. Our team will review
-                the
-                details and contact you if needed.</p>
-            <p class="close-hint">You can now safely close this page.</p>
-        </div>
-
-        <div class="lang-divider"><span>BN</span></div>
 
         <div class="bn-section">
             <h1 class="thank-you-title">ধন্যবাদ!</h1>
@@ -285,7 +338,7 @@
             <p class="close-hint">আপনি এখন নিরাপদে এই পৃষ্ঠাটি বন্ধ করতে পারেন।</p>
         </div>
 
-        <div class="bottom-divider"></div>
+        <div class="lang-divider"><span>BN</span></div>
 
         <div class="app-buttons">
             <a href="#" class="app-btn">
