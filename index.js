@@ -93,8 +93,8 @@ app.get("/qr/:code", async (req, res) => {
   }
 
   if (qr.isUsed) {
-    return res.send("⚠️ Sorry, this QR code has already been used.");
-  }
+  return res.render("qr-used");
+}
 
   // Render dedicated submission page
   res.render("submit-flat", { code });
