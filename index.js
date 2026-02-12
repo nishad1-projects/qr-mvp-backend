@@ -62,7 +62,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Home route
 app.get("/", (req, res) => {
-  res.send("QR MVP Server running 🚀");
+  res.redirect("https://saleflats.com/");
 });
 
 // Generate QR code
