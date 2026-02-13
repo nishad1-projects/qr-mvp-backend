@@ -162,7 +162,7 @@ app.get("/ping", (req, res) => {
 });
 
 // Public listings page (styled)
-app.get("/listings", async (req, res) => {
+app.get("/listings-ap", async (req, res) => {
   const submissions = await Submission.find().sort({ submittedAt: -1 });
 
   let html = `
@@ -232,26 +232,26 @@ app.get("/api/listings", async (req, res) => {
 });
 
 // Admin login page
-app.get("/admin/login", (req, res) => {
+app.get("/admin/login-basement7", (req, res) => {
   res.render("admin/login");
 });
 
 // Handle login (very simple MVP auth)
-app.post("/admin/login", (req, res) => {
+app.post("/admin/login-basement7", (req, res) => {
   const { password } = req.body;
 
-  if (password === "admin123") {
+  if (password === "never@17") {
     req.session.isAdmin = true;
-    res.redirect("/admin/dashboard");
+    res.redirect("/saleflats-basement");
   } else {
     res.send("Wrong password");
   }
 });
 
 // Admin dashboard page (with data)
-app.get("/admin/dashboard", async (req, res) => {
+app.get("/saleflats-basement", async (req, res) => {
   if (!req.session.isAdmin) {
-    return res.redirect("/admin/login");
+    return res.redirect("/admin/login-basement7");
   }
 
   const qrs = await QRCode.find().sort({ _id: -1 });
@@ -261,9 +261,9 @@ app.get("/admin/dashboard", async (req, res) => {
 });
 
 //Added Logout admin
-app.get("/admin/logout", (req, res) => {
+app.get("/admin/logout-basement7", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("/admin/login");
+    res.redirect("/admin/login-basement7");
   });
 });
 
