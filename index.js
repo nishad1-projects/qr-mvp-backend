@@ -226,7 +226,7 @@ app.get("/listings-ap", async (req, res) => {
   res.send(html);
 });
 // API listings (for WordPress / frontend)
-app.get("/data-qr-apartments", async (req, res) => {
+app.get("/api/sanelistings", async (req, res) => {
 
   const key = req.query.key;
 
