@@ -226,7 +226,16 @@ app.get("/listings-ap", async (req, res) => {
   res.send(html);
 });
 // API listings (for WordPress / frontend)
-app.get("/api/listings", async (req, res) => {
+app.get("/data-qr-apartments", async (req, res) => {
+
+  const key = req.query.key;
+
+  if (key !== process.env.API_SECRET_KEY) {
+    return res.status(403).json({
+      error: "Unauthorized access"
+    });
+  }
+
   const submissions = await Submission.find().sort({ submittedAt: -1 });
   res.json(submissions);
 });
