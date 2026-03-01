@@ -85,13 +85,13 @@ router.post('/create-payment', async (req, res) => {
             }
         });
 
-        if (response.data && response.data.data && response.data.data.checkoutUrl) {
-            return res.json({
-                success: true,
-                checkoutUrl: response.data.data.checkoutUrl,
-                merchantTransactionId: transactionId
-            });
-        }
+        if (response.data && response.data.RedirectURL) {
+    return res.json({
+        success: true,
+        checkoutUrl: response.data.RedirectURL,
+        merchantTransactionId: transactionId
+    });
+}
 
         res.status(500).json({ success: false, error: response.data });
     } catch (error) {
