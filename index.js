@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const epsRoutes = require('./routes/epsRoutes');
 require("dotenv").config();
 
 const { v2: cloudinary } = require("cloudinary");
@@ -44,6 +45,7 @@ const upload = multer({
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/eps', epsRoutes);
 
 //admin security session
 const session = require("express-session");
