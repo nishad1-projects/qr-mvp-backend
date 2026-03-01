@@ -1,4 +1,4 @@
-const epsRoutes = require('./routes/epsRoutes');
+const epsRoutes = require('./src/routes/epsRoutes');
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -13,8 +13,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const QRCode = require("../models/QRCode");
-const Submission = require("../models/Submission");
+const QRCode = require("./models/QRCode");
+const Submission = require("./models/Submission");
 
 const app = express();
 app.set("view engine", "ejs");
