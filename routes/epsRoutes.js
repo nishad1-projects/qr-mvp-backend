@@ -47,7 +47,7 @@ async function getEPSToken() {
  * POST /eps/create-payment
  * Expected body: { amount, orderId, transactionId, customerName, customerEmail, customerPhone }
  */
-router.post('/eps/create-payment', async (req, res) => {
+router.post('/create-payment', async (req, res) => {
     try {
         const { amount, orderId, transactionId, customerName, customerEmail, customerPhone } = req.body;
 
@@ -104,7 +104,7 @@ router.post('/eps/create-payment', async (req, res) => {
  * POST /eps/verify-payment
  * Expected body: { merchantTransactionId }
  */
-router.post('/eps/verify-payment', async (req, res) => {
+router.post('/verify-payment', async (req, res) => {
     try {
         const { merchantTransactionId } = req.body;
 
@@ -135,8 +135,8 @@ router.post('/eps/verify-payment', async (req, res) => {
 });
 
 // Simple callback routes for testing
-router.get('/eps/callback/success', (req, res) => res.send('Payment Successful! You can close this window.'));
-router.get('/eps/callback/fail', (req, res) => res.send('Payment Failed!'));
-router.get('/eps/callback/cancel', (req, res) => res.send('Payment Cancelled!'));
+router.get('/callback/success', (req, res) => res.send('Payment Successful! You can close this window.'));
+router.get('/callback/fail', (req, res) => res.send('Payment Failed!'));
+router.get('/callback/cancel', (req, res) => res.send('Payment Cancelled!'));
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const epsRoutes = require('./src/routes/epsRoutes');
+const epsRoutes = require('./routes/epsRoutes');
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
